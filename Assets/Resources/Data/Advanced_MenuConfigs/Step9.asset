@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ac1d12777187340a7ad12a2b3ccd9e, type: 3}
+  m_Name: Step9
+  m_EditorClassIdentifier: 
+  stepName: 31
+  numOfButtons: 1
+  actions: 0000000001000000
+  buttonTexts:
+  - Continue
+  title: Step 3 - Polarity Switch
+  text: If the Operator Press this button while the system is in CCD it will indicate
+    that it is possible to use this button only in IR. In case the active sensor
+    is IR, the polarity can be changed between White Hot and Black Hot.
+  scanPriority: 0000000001000000
+  waitTimeBetweenPriorities: 0.8
+  hasSound: 0
+  SoundTypeKeys: 41
+  optionaltexts: []

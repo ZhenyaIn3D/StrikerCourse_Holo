@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QCARConfig>
+    <Tracking>
+        <ModelTarget name="joystic_Copy" trackingMode="car" motionHint="adaptive" upVector="0.0 1.0 0.0" optimizeTrackingFor="default"> </ModelTarget>
+        <ModelTarget name="Screen" trackingMode="car" motionHint="adaptive" upVector="0.0 0.0 1.0" optimizeTrackingFor="default"> </ModelTarget>
+    </Tracking>
+    <Assembly name="joystic_Copy" assemblyId="b6df1840eb164e08bd7eb122aa4384f9">
+        <Part name="joystic_Copy" translation="0 0 0" rotation="AD: 0 0 1 0"></Part>
+        <EntryPoint name="(none)" trained="yes"></EntryPoint>
+    </Assembly>
+    <Assembly name="Screen" assemblyId="e0a91a68844b44c5aa5c516e3ff3b094">
+        <Part name="Screen" translation="0 0 0" rotation="AD: 0 0 1 0"></Part>
+        <EntryPoint name="(none)" trained="yes"></EntryPoint>
+    </Assembly>
+    <ModelTargetDatabase name="Strikerv2"> </ModelTargetDatabase>
+</QCARConfig>

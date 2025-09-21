@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe21b98f2d0b4e4d99194f3af826d3d, type: 3}
+  m_Name: New Sound Mapper
+  m_EditorClassIdentifier: 
+  folderPath: D:/0Dar Luke/Unity Projects/Rafael_Striker_Hololens2_Vuforia/Assets/Resources/SoundResources/Sounds
+  soundMap:
+  - soundTypeKey: Introduction
+    audioClip:
+    - {fileID: 8300000, guid: edd939ebb6767924db33a31fc9c547c2, type: 3}
+    selection: 0
+  - soundTypeKey: ScanFinished
+    audioClip:
+    - {fileID: 8300000, guid: c1c7b404cb4aeee44b5bc76408034231, type: 3}
+    selection: 1
+  - soundTypeKey: Track
+    audioClip:
+    - {fileID: 8300000, guid: 55e5795b748cf1840ae3e6f0a0d98c06, type: 3}
+    selection: 2
+  - soundTypeKey: CCDIR
+    audioClip:
+    - {fileID: 8300000, guid: dd8ebe08fe8b30947883b9aec66cf731, type: 3}
+    selection: 3
+  - soundTypeKey: VideoSource
+    audioClip:
+    - {fileID: 8300000, guid: 79efb13162699ac46ba0a7f17b7885ee, type: 3}
+    selection: 4
+  - soundTypeKey: Polarity
+    audioClip:
+    - {fileID: 8300000, guid: db15518dd1a94b344bae643d7d729a2a, type: 3}
+    selection: 5
+  - soundTypeKey: Congratulations
+    audioClip:
+    - {fileID: 8300000, guid: 19ae6c209eef61645bf3885676b918a7, type: 3}
+    selection: 6
+  - soundTypeKey: Ding
+    audioClip:
+    - {fileID: 8300000, guid: 187ae285977bdc84c9af6b951bbc2946, type: 3}
+    selection: 7
+  - soundTypeKey: Narration_DisplayUnit
+    audioClip:
+    - {fileID: 8300000, guid: f4d0cb3365629e343be1fa411bb98ec9, type: 3}
+    selection: 9
+  - soundTypeKey: Narration_ControlPanel
+    audioClip:
+    - {fileID: 8300000, guid: d67ce9cef5efd4e449478e8a31eb3e37, type: 3}
+    selection: 10
+  - soundTypeKey: Narration_HandleGrip
+    audioClip:
+    - {fileID: 8300000, guid: 961e506e92a4d3849a7a0ae03867274b, type: 3}
+    selection: 11
+  - soundTypeKey: Narration_MainSightDisplay
+    audioClip:
+    - {fileID: 8300000, guid: d7415baa9fcc3c44e9f77c8e093a2d99, type: 3}
+    selection: 12
+  - soundTypeKey: Narration_SafetyStatus
+    audioClip:
+    - {fileID: 8300000, guid: f83a6ac905c7e8641b0b2eb2ef63c05f, type: 3}
+    selection: 13
+  - soundTypeKey: Narration_StatusBar
+    audioClip:
+    - {fileID: 8300000, guid: fae7a269844487c4b82020239be01201, type: 3}
+    selection: 14
+  - soundTypeKey: Narration_SystemFaults
+    audioClip:
+    - {fileID: 8300000, guid: 7c4685bc65ef7734986d6dc38adfc18e, type: 3}
+    selection: 15
+  - soundTypeKey: Narration_VehicleCommanderHandle
+    audioClip:
+    - {fileID: 8300000, guid: e07a3d34d2e09a446b3fb54f67387006, type: 3}
+    selection: 16
+  - soundTypeKey: Narration_WeaponManagement
+    audioClip:
+    - {fileID: 8300000, guid: 9925c53847ede6640bb9ed68614ccbc3, type: 3}
+    selection: 17
+  - soundTypeKey: Narration_WeaponStation
+    audioClip:
+    - {fileID: 8300000, guid: f365b7c27309ffb42a782792567aa1ed, type: 3}
+    selection: 18
+  - soundTypeKey: Narration_LookAtDisplayScreen
+    audioClip:
+    - {fileID: 8300000, guid: 00cc5439f4f3be44281ace34fe7ab99e, type: 3}
+    selection: 19
+  - soundTypeKey: Narration_LookAtJoystic
+    audioClip:
+    - {fileID: 8300000, guid: 0b43417af92064645a68d61f891d7ea7, type: 3}
+    selection: 20
+  - soundTypeKey: ScanSuccessful
+    audioClip:
+    - {fileID: 8300000, guid: a65a9d8f08817fc4bb1f7b45c73e5a49, type: 3}
+    selection: 21
+  - soundTypeKey: Striker_1_1
+    audioClip:
+    - {fileID: 8300000, guid: b9e2765f1c13e1647973893ebe6d9074, type: 3}
+    selection: 22
+  - soundTypeKey: Striker_1_2
+    audioClip:
+    - {fileID: 8300000, guid: 46d70b3e393fc77448556d3ec9f2fc9b, type: 3}
+    selection: 23
+  - soundTypeKey: Striler_1_3a
+    audioClip:
+    - {fileID: 8300000, guid: 1ad124667d53d9a4c88078bd781de8ca, type: 3}
+    selection: 24
+  - soundTypeKey: Striker_1_3b
+    audioClip:
+    - {fileID: 8300000, guid: 7b67f276c8bf1064692e8c1bb6bfc40a, type: 3}
+    selection: 25
+  - soundTypeKey: Striker_1_3c
+    audioClip:
+    - {fileID: 8300000, guid: ec81e5a816b999a4aa00171d26e34aa3, type: 3}
+    selection: 26
+  - soundTypeKey: Correct
+    audioClip:
+    - {fileID: 8300000, guid: 668fc5908d5a1ec44bf720146a53e3e9, type: 3}
+    selection: 27
+  - soundTypeKey: IncorrectTryAgain
+    audioClip:
+    - {fileID: 8300000, guid: 542cce231c1117b47833d19252c34920, type: 3}
+    selection: 28
+  - soundTypeKey: Striker_2_1
+    audioClip:
+    - {fileID: 8300000, guid: e5d78ce4cd452934da358fa2a484eb55, type: 3}
+    selection: 29
+  - soundTypeKey: Striker_2_2
+    audioClip:
+    - {fileID: 8300000, guid: 0d2fe2f279a7baf419671c14a69c8078, type: 3}
+    selection: 30
+  - soundTypeKey: Striker_2_3a
+    audioClip:
+    - {fileID: 8300000, guid: c17df8379bf64ed4bb1ac06a059661e0, type: 3}
+    selection: 31
+  - soundTypeKey: Striker_2_3b
+    audioClip:
+    - {fileID: 8300000, guid: df3bc9add93dab94a8aa3e709a0b0bae, type: 3}
+    selection: 32
+  - soundTypeKey: Striker_2_3c
+    audioClip:
+    - {fileID: 8300000, guid: 93086d6d0995912469d7027f422b5efc, type: 3}
+    selection: 33
+  - soundTypeKey: Striker_2_3d
+    audioClip:
+    - {fileID: 8300000, guid: 6d284954f8b15b047a1e646e05b010c9, type: 3}
+    selection: 34
+  - soundTypeKey: Striker_3_1
+    audioClip:
+    - {fileID: 8300000, guid: c31cd98f32330f04fb01efa0fde6ec78, type: 3}
+    selection: 35
+  - soundTypeKey: Striker_3_2
+    audioClip:
+    - {fileID: 8300000, guid: a25c2317b4981614c8928e89a0f6bbdb, type: 3}
+    selection: 36
+  - soundTypeKey: Striker_3_3a
+    audioClip:
+    - {fileID: 8300000, guid: 90e87bd2c1dbc3043925199b2766abcc, type: 3}
+    selection: 37
+  - soundTypeKey: Striker_3_3b
+    audioClip:
+    - {fileID: 8300000, guid: 13ea800551b2981409f566bbedc32296, type: 3}
+    selection: 38
+  - soundTypeKey: Striker_3_4
+    audioClip:
+    - {fileID: 8300000, guid: feda7fb367965d543a66426d5d713cef, type: 3}
+    selection: 41
+  - soundTypeKey: Striker_3_5a
+    audioClip:
+    - {fileID: 8300000, guid: ae30cd7cadb0b6a499f1cb3095d222b9, type: 3}
+    selection: 42
+  - soundTypeKey: Striker_3_5b
+    audioClip:
+    - {fileID: 8300000, guid: 1ddc8127cba8f444dbbe77a4e4cd187e, type: 3}
+    selection: 43

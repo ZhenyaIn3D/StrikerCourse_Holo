@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ac1d12777187340a7ad12a2b3ccd9e, type: 3}
+  m_Name: Step6
+  m_EditorClassIdentifier: 
+  stepName: 13
+  numOfButtons: 4
+  actions: 01000000000000000400000006000000
+  buttonTexts:
+  - Back
+  - Continue To Course #2
+  - Restart Course
+  - Back To Menu
+  title: Congratulation !
+  text: "You completed Course#1 \u2013 Operator Console overview. "
+  scanPriority: 
+  waitTimeBetweenPriorities: 0
+  hasSound: 1
+  SoundTypeKeys: 6

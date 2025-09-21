@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="joystic" motionHint="adaptive" trackingMode="car" optimizeTrackingFor="default"/>
+
+</Tracking>
+
+<Assembly name="joystics_assembly" assemblyId="b9f01df24a3245d3a3cb93eb4f356e15">
+<Part name="joystic" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="GuideView_0000" translation="5.79071 4.03832 63.4581" rotation="AD: 1 0.0158768 -0.0508537 214.631" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0001" translation="2.56471 4.21472 55.3923" rotation="AD: 0.997247 0.161117 -0.545449 208.782" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0002" translation="5.27268 6.04473 52.4707" rotation="AD: -0.942281 -0.430541 1.33552 159.623" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0003" translation="2.28073 9.16337 49.1268" rotation="AD: 0.0788645 -1.07376 2.69132 181.244" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0004" translation="-4.49315 8.49754 48.054" rotation="AD: 0.984518 -0.245973 1.05673 197.78" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0005" translation="-5.30129 5.83152 52.6739" rotation="AD: 0.996871 -0.183239 0.513663 214.756" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0006" translation="-2.48628 -4.43726 55.2997" rotation="AD: -1 -0.00750956 0.00778005 92.0303" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0007" translation="-2.33959 5.67109 54.5493" rotation="AD: 1 0.00450053 -0.0231845 201.965" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0008" translation="3.01388 7.37378 52.5521" rotation="AD: 0.999759 0.0420604 -0.612785 186.694" trained="no">
+
+</EntryPoint>
+<EntryPoint name="GuideView_0009" translation="-5.29727 7.80142 49.1861" rotation="AD: 0.999781 -0.0461861 0.511271 189.189" trained="no">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARConfig>

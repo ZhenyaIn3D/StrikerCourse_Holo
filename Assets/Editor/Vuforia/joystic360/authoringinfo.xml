@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v7.0.6">
+        <ModelTarget name="joystic_Copy" targetId="652e7268b95d49579373592b01f63a4d" version="14.0" toolVersion="v7.0.6" bbox="-10.047500 -0.020817 -4.159892 10.112844 19.029591 12.129189" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="joystic_Copy" assemblyId="ea7049f358b04ba0ae2a8d4da3449da2">
+        <Part name="joystic_Copy" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+</QCARInfo>

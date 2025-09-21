@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v7.0.6">
+        <ModelTarget name="Screen" targetId="fdfeea0a3d9d4495b48712d7fa4ad628" version="14.0" toolVersion="v7.0.6" bbox="-0.157066 -0.041483 -0.149496 0.201073 0.025884 0.114329" trackingMode="car" upVector="0.0 0.0 1.0" optimizeTrackingFor="default" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="Screen" assemblyId="c1b99f8d04014fbeb7e24008251634a2">
+        <Part name="Screen" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+</QCARInfo>

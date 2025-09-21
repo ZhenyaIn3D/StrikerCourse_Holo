@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v7.0.6">
+        <ModelTarget name="Screen" targetId="eb52252baa684a4baf4feaca13a17f35" bbox="-0.157066 -0.041483 -0.149496 0.201073 0.025884 0.114329" version="14.0" toolVersion="v7.0.6" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="joystic_Copy" targetId="8eb83739c5364f9ab2c36ac1ae74bf06" bbox="-10.047500 -0.020817 -4.159892 10.112844 19.029591 12.129189" version="14.0" toolVersion="v7.0.6" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="Screen" assemblyId="bc978152ad9c42c4ab1d72afa6e32a58">
+        <Part name="Screen" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="joystic_Copy" assemblyId="2588a4574e5245c9a2a78c96d2d79093">
+        <Part name="joystic_Copy" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <ModelTargetDatabase mtDBid="1b214a4d64af49fcaff47aeeba75251a" name="Striker" toolVersion="v7.0.6" version="36.0" />
+</QCARInfo>
