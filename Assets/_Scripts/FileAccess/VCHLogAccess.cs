@@ -16,6 +16,7 @@ public static class VCHLogAccess
     
     private static async Task FileLoadingTask(string filePath, Action<string> onSuccess)
     {
+        
 #if WINDOWS_UWP //HOLOLENSE
 
         // Get the Documents folder
@@ -25,6 +26,7 @@ public static class VCHLogAccess
 
         // read the content into a buffer
         var vchStateJSON = await Windows.Storage.FileIO.ReadTextAsync(file);
+        
 #endif
         
 #if UNITY_EDITOR

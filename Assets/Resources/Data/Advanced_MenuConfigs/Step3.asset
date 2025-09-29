@@ -18,6 +18,7 @@ MonoBehaviour:
   buttonTexts: []
   title: Change Mode Selection
   text: Please Change Switch Control to OBSERVER
+  isInteractive: 1
   scanPriority: 0000000001000000
   waitTimeBetweenPriorities: 0.8
   hasSound: 1

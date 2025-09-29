@@ -13,14 +13,21 @@ public class ScansManager : MonoBehaviour
 {
     [SerializeField] private VuforiaBehaviour vuforiaBehaviour;
     [SerializeField] private UnityEngine.UI.Image soundImage;
+    
+    [Header("Buttons")]
     [SerializeField] private Material activeMaterial;
     [SerializeField] private Material notActiveMaterial;
     [SerializeField] private RawImage[] buttonBackgroundMR;
+    
+    [Header("Scan targets")]
     [SerializeField] private ScanTransformAdjustment[] transfomAdjusments;
     [SerializeField] private ScanTargetControllerBase[] scanControllers;
     [SerializeField] private ScalableDataSetTrackableBehaviour[] vuforiaScanTargets;
+    
+    [Header("Menu")]
     [SerializeField] private Sprite[] soundIcons;
     [SerializeField] private Transform menuParent;
+    
     [Inject] private SoundSystem soundSystem;
     [Inject] private InputManager inputManager;
     private CountdownTimer timer;
@@ -32,11 +39,9 @@ public class ScansManager : MonoBehaviour
     public event Action OnAllScanFound;
     public event Action OnStartScan;
     
-    
-
     private void Awake()
     {
-        follow=GetComponentInChildren<Follow>();
+        follow = GetComponentInChildren<Follow>();
         timer = new CountdownTimer(0.2f);
         scanStatus = new bool[transfomAdjusments.Length];
         for (var index = 0; index < scanStatus.Length; index++)
@@ -73,9 +78,9 @@ public class ScansManager : MonoBehaviour
         for (int i = 0; i < transfomAdjusments.Length; i++)
         {
             var index = i;
-            transfomAdjusments[i].OnFinishScan+=(ScanTargetType st)=>RegisterScanStatus(st,false);
+            transfomAdjusments[i].OnFinishScan += (ScanTargetType st)=>RegisterScanStatus(st,false);
             transfomAdjusments[i].OnFinishScan += NotifyFinishedScan;
-            transfomAdjusments[i].OnFinishScan+=(ScanTargetType st)=>ChangeMaterial(buttonBackgroundMR[index],false);
+            transfomAdjusments[i].OnFinishScan += (ScanTargetType st)=>ChangeMaterial(buttonBackgroundMR[index],false);
         }
     }
     

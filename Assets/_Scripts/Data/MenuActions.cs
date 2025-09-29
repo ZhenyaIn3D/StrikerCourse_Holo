@@ -8,6 +8,6 @@ public enum MenuActions
     Restart,
     LiveExp,
     BackToMenu,
-    Test
+    Again
 }
 

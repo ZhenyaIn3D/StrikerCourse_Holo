@@ -18,6 +18,7 @@ MonoBehaviour:
   buttonTexts: []
   title: Sensor Toggle Test
   text: 'Try changing active sensor to IR '
+  isInteractive: 1
   scanPriority: 0000000001000000
   waitTimeBetweenPriorities: 0.8
   hasSound: 0

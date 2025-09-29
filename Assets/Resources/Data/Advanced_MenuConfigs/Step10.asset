@@ -18,6 +18,7 @@ MonoBehaviour:
   buttonTexts: []
   title: Polarity Change Test
   text: Please Change Polarity to Black Hot
+  isInteractive: 1
   scanPriority: 0000000001000000
   waitTimeBetweenPriorities: 0.8
   hasSound: 0
