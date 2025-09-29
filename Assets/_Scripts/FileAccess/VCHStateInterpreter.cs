@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,17 +13,22 @@ namespace FileAccess
         private VCHState _vchState;
         public Action<VCHState> ReportVCHState;
         private Dictionary<StepName, Func<bool>> endConditions;
+        public GameObject SuccessSignal;
         void Start()
         {
             onSuccess += InterpretVCHState;
-            timeTillUpdate = updateCycle;     
+            onSuccess += ShowConnectSignal;
+            timeTillUpdate = updateCycle;
+            SuccessSignal.SetActive(false);
         }
         
         void Update()
         {
             timeTillUpdate -= Time.deltaTime;
+            
             if ( timeTillUpdate < 0 )
             {
+                
                 timeTillUpdate = updateCycle;
                 VCHLogAccess.GetVCHLogContent(onSuccess);
             }
@@ -30,9 +36,22 @@ namespace FileAccess
 
         public void InterpretVCHState(string vchState)
         {
+            
             _vchState = JsonUtility.FromJson<VCHState>(vchState);
-            //Debug.Log("interpreted got " + _vchState.Mode);
             ReportVCHState(_vchState);
+        }
+
+        public void ShowConnectSignal(string vchState)
+        {
+            StartCoroutine(ShowConnectSignalCo());
+        }
+
+        private IEnumerator ShowConnectSignalCo()
+        {
+            SuccessSignal.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            SuccessSignal.SetActive(false);
+            
         }
         
     }

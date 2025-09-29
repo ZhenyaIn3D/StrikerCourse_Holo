@@ -25,9 +25,14 @@ public class ScanVisual : MonoBehaviour
        scanManager.OnFinishScan -= FinishScanVisual;
    }
 
+   
+   /// <summary>
+   /// ScanVisual is present on both scan targets. As we are trying to unite two targets into one => both of ScanVisual should react to ScanFinish
+   /// </summary>
+   /// <param name="scanTargetType"></param>
    private void FinishScanVisual(ScanTargetType scanTargetType)
    {
-       if(this.scanTargetType!=scanTargetType) return;
+       //if(this.scanTargetType!=scanTargetType) return; no matter what is scanned =? both models should appear
        AnimateScan();
    }
    

@@ -29,8 +29,7 @@ public class ScanIconController : MonoBehaviour
         scanManager.OnStartScan -= LocateScan;
         scanManager.OnFinishScan -= Deactivate;
     }
-
-
+    
 
     private void LocateScan()
     {

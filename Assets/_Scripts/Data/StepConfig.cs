@@ -10,6 +10,7 @@ public class StepConfig : ScriptableObject
     public string[] buttonTexts;
     public string title;
     public string text;
+    public bool isInteractive;
     public ScanTargetType[] scanPriority;
     public float waitTimeBetweenPriorities;
     public bool hasSound;

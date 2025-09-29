@@ -134,8 +134,9 @@ public class Step : MonoBehaviour
     {
         wrongAnswerIndication?.SetActive(false);
         correctAnswerIndication?.SetActive(false);
-        Debug.Log("ShowInteractively");
+        
         endConditions = controller.endConditions;
+        
         foreach (var message in messages)
         {
             if (cancelled) return;
@@ -170,6 +171,7 @@ public class Step : MonoBehaviour
                     await Task.Delay(6000); // INCORRECT CLIP IS 2.3 SEC
                 }
             }
+            
             correctionTip.SetActive(false);
             wrongAnswerIndication.SetActive(false);
             correctAnswerIndication.SetActive(true);

@@ -22,9 +22,13 @@ public class ActivationController : MonoBehaviour
         scansManager.OnFinishScan -= Activate;
     }
 
+    /// <summary>
+    /// React to every FinishScan, not only your own
+    /// </summary>
+    /// <param name="stt"></param>
     private async void Activate(ScanTargetType stt)
     {
-        if(scanTargetType!=stt) return;
+        //if(scanTargetType!=stt) return;
         await Task.Delay(delayTime * 1000);
         foreach (var target in targets)
         {

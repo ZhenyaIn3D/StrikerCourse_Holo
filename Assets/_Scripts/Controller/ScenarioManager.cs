@@ -18,6 +18,7 @@ public class ScenarioManager : ScanTargetControllerBase
     
     [SerializeField] private ScenarioConfig[] scenarios;
     [SerializeField] private TextMeshProUGUI title;
+    [SerializeField] private GameObject ActionRequiredTag;
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] private Material[] mats;
     [SerializeField] private GameObject scanOptions;
@@ -126,6 +127,9 @@ public class ScenarioManager : ScanTargetControllerBase
         var menuConfig = scenarios[currentSenario].menuConfig[currentStep];
         UpdateButtons(menuConfig);
         UpdateText(menuConfig);
+        
+        if(menuConfig.isInteractive)ActionRequiredTag.SetActive(true);
+        else ActionRequiredTag.SetActive(false);
     }
 
     private void PlaySound()

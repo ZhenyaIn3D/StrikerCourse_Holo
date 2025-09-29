@@ -14,6 +14,7 @@ public class ScanTransformAdjustment : MonoBehaviour
     private StopwatchTimer overallTimer;
     private Vector3 pos = Vector3.zero;
     private Status currentStatusLevel = Status.TRACKED;
+    
     private bool startFollow;
     private bool scanInitialized;
     private float smoothFactor = 0.8f;
@@ -21,9 +22,7 @@ public class ScanTransformAdjustment : MonoBehaviour
 
     public ScanTargetType scanTargetType;
     public Action<ScanTargetType> OnFinishScan;
-   
     
-
     private void Start()
     {
         eventHandler = scanSource.GetComponent<DefaultObserverEventHandler>();
