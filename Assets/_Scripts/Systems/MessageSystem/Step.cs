@@ -25,6 +25,7 @@ public class Step : MonoBehaviour
     private VCHStateMachineController controller;
 
     private Dictionary<StepName, Func<bool>> endConditions;
+    private Dictionary<StepName, Func<VCHControlState>> relevantStateGetters;
     [SerializeField] private AudioClip[] narrationVersions;//@TODO??
     [SerializeField] private string[] instructionsVersions;//@TODO??
     Dictionary<VCHControlState, int> stateVersions;
@@ -192,8 +193,10 @@ public class Step : MonoBehaviour
     private async Task ShowInteractively()
     {
         InitializeIndicators();
+        
         endConditions = controller.endConditions;
-    
+        relevantStateGetters = controller.relevantStateGetters;
+        
         foreach (var message in messages)
         {
             if (cancelled) return;
@@ -212,9 +215,7 @@ public class Step : MonoBehaviour
             }
             
             await WaitForCorrectAnswer();
-            
-            //
-            //await ShowCorrectFeedback();
+
         }
     }
 
@@ -256,6 +257,7 @@ public class Step : MonoBehaviour
         
         SetIndicatorState(correctionTip, false);
         await TaskEx.WaitForConditionWithFeedback(
+            getCurrentRelevantState: () => relevantStateGetters[stepName](),
             condition: () => endConditions[stepName](),
             onCorrect: () => ShowCorrectFeedback(),
             onWrong: () =>  ShowWrongFeedback(),

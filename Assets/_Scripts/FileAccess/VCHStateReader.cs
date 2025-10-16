@@ -81,7 +81,7 @@ namespace FileAccess
         
         public void InterpretVCHState(string vchState)
         {
-            textState.text = "Success";
+            textState.text = vchState; // DEV
             _vchState = JsonUtility.FromJson<VCHState>(vchState);
             ReportVCHState.Invoke(_vchState);;
         }

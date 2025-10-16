@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using VCHStateMachine;
 
 namespace _Scripts.Utils
 {
@@ -53,15 +54,17 @@ namespace _Scripts.Utils
         /// <param name="timeout">The timeout in milliseconds.</param>
         /// <returns></returns>
         public static async Task WaitForConditionWithFeedback(
+            Func<System.Object> getCurrentRelevantState,
             Func<bool> condition, 
             Action onCorrect, 
             Action onWrong,
-            int checkFrequency = 100,
+            int checkFrequency = 1000,
             int timeout = -1)
         {
             var startTime = Time.time;
-            var previousState = condition();
-    
+            var initialState = getCurrentRelevantState();
+            var previousState = initialState;
+            
             while (true)
             {
                 // Check for timeout
@@ -71,23 +74,27 @@ namespace _Scripts.Utils
                 // }
         
                 await Task.Delay(checkFrequency);
-        
-                var currentState = condition();
-        
-                // Detect state change
-                if (currentState != previousState)
+                
+                var currentState = getCurrentRelevantState();
+                var conditionMet = condition();
+
+                if (currentState != initialState)
                 {
-                    if (currentState) // Condition met
+                    // Detect state change
+
+                    if (conditionMet) // Condition met
                     {
                         onCorrect?.Invoke();
                         return; // Exit function
                     }
-                    else // Condition not met
+                    else if (currentState != previousState)// Condition not met
                     {
                         onWrong?.Invoke();
-                        previousState = currentState; // Continue waiting
                     }
-                }
+                } 
+                // If currentState == initialState, no action performed yet - no feedback
+
+                previousState = currentState;
             }
         }
         

@@ -67,11 +67,18 @@ public static class VCHLogAccess
         {
 #if WINDOWS_UWP
             // Read directly from cached file reference
+            if (_cachedFile == null)
+            {
+                throw new FileNotFoundException("Cached file reference is null");
+            }
             var vchStateJSON = await Windows.Storage.FileIO.ReadTextAsync(_cachedFile);
-            if(vchStateJSON == null || vchStateJSON == string.Empty) vchStateJSON = "ALARMMM";
+            if (string.IsNullOrWhiteSpace(vchStateJSON))
+            {
+                throw new ("Cached file reference is null");
+            }
             MainThreadDispatcher.Instance.DoInMainThread(() => onSuccess?.Invoke(vchStateJSON));
 #endif
-        
+            throw new Exception("vchState file is empty");
 #if UNITY_EDITOR
             // Read from cached path - Works on computer
             var vchStateJSON = await File.ReadAllTextAsync(_cachedFilePath);

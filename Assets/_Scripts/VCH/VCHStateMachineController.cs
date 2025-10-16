@@ -12,6 +12,7 @@ namespace VCHStateMachine
         private VCHMachineState currentState;
         [SerializeField] private VCHStateReader vchStateReader;
 
+        public Dictionary<StepName, Func<VCHControlState>> relevantStateGetters ;
         public Dictionary<StepName, Func<bool>> endConditions;
 
         private bool stateChanged = false;
@@ -62,7 +63,16 @@ namespace VCHStateMachine
             if (Instance == null) Instance = this;// Singleton pattern
 
             currentState = new VCHMachineState(); // data object
-            
+            relevantStateGetters = new Dictionary<StepName, Func<VCHControlState>>
+            {
+                { StepName.SightModeSelectionToObserver, GetCurrentModeControlState},
+                { StepName.SightModeSelectionToEnslave, GetCurrentModeControlState },
+                { StepName.SightModeSelectionToShooter, GetCurrentModeControlState },
+                { StepName.SensorToggleToIR, GetCurrentSensorControlState },
+                { StepName.SensorToggleToCDD, GetCurrentSensorControlState },
+                { StepName.PolarityToggleToBlackHot, GetCurrentPolarityControlState},
+                { StepName.PolarityToggleToWhiteHot, GetCurrentPolarityControlState}
+            };
             //Interactive steps depend on specific condition to continue
             endConditions = new Dictionary<StepName, Func<bool>>
             {
@@ -119,6 +129,11 @@ namespace VCHStateMachine
         }
 
         #region Shooter Control
+
+        public VCHControlState GetCurrentModeControlState()
+        {
+            return currentState.currentMode;
+        }
         public bool IsObserverMode()
         {
             return currentState.currentMode == observerMode;
@@ -136,6 +151,10 @@ namespace VCHStateMachine
         #endregion
         
         #region Sensor
+        public VCHControlState GetCurrentSensorControlState()
+        {
+            return currentState.currentSensor;
+        }
         public bool IsSensorIR()
         {
             return currentState.currentSensor == irSensor;
@@ -148,6 +167,10 @@ namespace VCHStateMachine
         #endregion
         
         #region Polarity
+        public VCHControlState GetCurrentPolarityControlState()
+        {
+            return currentState.currentPolarity;
+        }
         public bool IsPolarityBlack()
         {
             return currentState.currentPolarity == blackPolarity;
@@ -160,6 +183,11 @@ namespace VCHStateMachine
         #endregion
         
         #region Azymuth
+        
+        public VCHControlState GetCurrentAzymuthControlState()
+        {
+            return currentState.currentAzymuth;
+        }
         public bool IsAzymuthRight()
         {
             return currentState.currentAzymuth == azymuthRight;
@@ -176,7 +204,9 @@ namespace VCHStateMachine
         }
         #endregion
 
-
+        /// DEV 
+        /// </summary>
+        /// <param name="mode"></param>
         public void ForceShooterMode()
         {
             ForceVCHModeChange(ModeControlKey.SHOOTER);
