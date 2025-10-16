@@ -10,7 +10,7 @@ namespace VCHStateMachine
     {
         public static VCHStateMachineController Instance;
         private VCHMachineState currentState;
-        [SerializeField] private VCHStateInterpreter VchStateInterpreter;
+        [SerializeField] private VCHStateReader vchStateReader;
 
         public Dictionary<StepName, Func<bool>> endConditions;
 
@@ -49,7 +49,6 @@ namespace VCHStateMachine
         // public ElevationControlState elevationDown = new DownElevationControlState();
         // public ElevationControlState elevationNone  = new NoneElevationControlState();
         
-        
         //DATA
         private Dictionary<string, ModeControlKey> modeControlKeyDictionary;
         private Dictionary<string, SensorControlKey> sensorKeyDictionary;
@@ -60,10 +59,11 @@ namespace VCHStateMachine
         // Start is called before the first frame update
         void Start()
         {
-            if (Instance == null) Instance = this;
+            if (Instance == null) Instance = this;// Singleton pattern
 
-            currentState = new VCHMachineState();
+            currentState = new VCHMachineState(); // data object
             
+            //Interactive steps depend on specific condition to continue
             endConditions = new Dictionary<StepName, Func<bool>>
             {
                 { StepName.SightModeSelectionToObserver, IsObserverMode },
@@ -75,7 +75,7 @@ namespace VCHStateMachine
                 { StepName.PolarityToggleToWhiteHot, IsPolarityWhite }
             };
             
-            VchStateInterpreter.ReportVCHState += OnVCHStateReport;
+            vchStateReader.ReportVCHState += OnVCHStateReport;
 
             modeControlKeyDictionary = new Dictionary<string, ModeControlKey>()
             {
@@ -175,10 +175,40 @@ namespace VCHStateMachine
             return currentState.currentAzymuth == azymuthNone;
         }
         #endregion
+
+
+        public void ForceShooterMode()
+        {
+            ForceVCHModeChange(ModeControlKey.SHOOTER);
+        }
+        public void ForceObserverMode()
+        {
+            ForceVCHModeChange(ModeControlKey.OBSERVER);
+        }
+        public void ForceEnslaveMode()
+        {
+            ForceVCHModeChange(ModeControlKey.ENSLAVE);
+        }
+        
+        /// <summary>
+        /// DEV 
+        /// </summary>
+        /// <param name="mode"></param>
+        private void ForceVCHModeChange(ModeControlKey mode)
+        {
+            stateChanged = false;
+            if (currentState.currentMode == null || mode != currentState.currentMode.ModeKey) 
+            {
+                
+                ChangeModeState(mode); // only for the first
+                stateChanged = true;
+            }
+        }
         
         private void OnVCHStateReport(VCHState newState)
         {
             stateChanged = false;
+            
             // MODE, if new
             receivedModeKey = modeControlKeyDictionary[newState.Mode];
             if (currentState.currentMode == null || receivedModeKey != currentState.currentMode.ModeKey) 
@@ -217,7 +247,8 @@ namespace VCHStateMachine
             {
                 currentState.currentMode.OnExit();
             }
-
+            
+            Debug.Log($"From: {currentState.currentMode}");
             switch (mode)
             {
                 case ModeControlKey.SHOOTER:
@@ -232,7 +263,8 @@ namespace VCHStateMachine
                 default:
                     throw new Exception("Unknown Mode Control State");
             }
-
+            
+            Debug.Log($"To: {currentState.currentMode}");
             currentState.currentMode.OnEnter();
         }
 

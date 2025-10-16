@@ -9,6 +9,10 @@ using VCHStateMachine;
 
 public class Step : MonoBehaviour
 {
+    private const int NARRATION_PAUSE_MS = 500;
+    private const int WRONG_ANSWER_DISPLAY_MS = 6000;
+    private const int CORRECT_ANSWER_DISPLAY_MS = 1000;
+    
     [SerializeField] private UIPoint[] messages;
     [FormerlySerializedAs("infoStepName")] public StepName stepName;
     
@@ -43,11 +47,10 @@ public class Step : MonoBehaviour
         
         cancelled = false;
         
-        if (hasVersions)
-        {
-            
-        }
-        
+        // if (hasVersions)
+        // {
+        //     
+        // }
         
         if (displayGradually) // GRADUAL DISPLAY of messages
         {
@@ -75,7 +78,12 @@ public class Step : MonoBehaviour
         }
 
     }
-
+    private void InitializeIndicators()
+    {
+        SetIndicatorState(wrongAnswerIndication, false);
+        SetIndicatorState(correctAnswerIndication, false);
+    }
+    
     /// <summary>
     /// Ways of showing step content
     /// </summary>
@@ -130,58 +138,160 @@ public class Step : MonoBehaviour
         }
     }
 
+    // private async Task ShowInteractively()
+    // {
+    //     wrongAnswerIndication?.SetActive(false);
+    //     correctAnswerIndication?.SetActive(false);
+    //     
+    //     endConditions = controller.endConditions;
+    //     
+    //     foreach (var message in messages)
+    //     {
+    //         if (cancelled) return;
+    //         await message.ShowAnimateTransition(); 
+    //
+    //         if (message.UseNarration)
+    //         {
+    //             message.ToggleBackgroundHighlight(true);
+    //             var delayTime = (int)Mathf.Ceil(message.Narration());
+    //             for (int i = 0; i < delayTime; i++)
+    //             {
+    //                 if (cancelled) return;
+    //                 await Task.Delay(1000);
+    //             }
+    //             message.ToggleBackgroundHighlight(false);
+    //         } // showed & said everything
+    //         else
+    //         {
+    //             await Task.Delay(500);
+    //         }
+    //
+    //         while (!endConditions[stepName]())
+    //         {
+    //             wrongAnswerIndication.SetActive(false);
+    //             await TaskEx.WaitUntil(controller.IsStateChanged, 5, -1);
+    //             if (!endConditions[stepName]())
+    //             {
+    //                 wrongAnswerIndication.SetActive(true);
+    //                 Debug.Log("INCORRECT");
+    //                 correctionTip.SetActive(true);
+    //                 if (cancelled) return;
+    //                 await Task.Delay(6000); // INCORRECT CLIP IS 2.3 SEC
+    //             }
+    //         }
+    //         
+    //         correctionTip.SetActive(false);
+    //         wrongAnswerIndication.SetActive(false);
+    //         correctAnswerIndication.SetActive(true);
+    //         await Task.Delay(1000); // CORRECT CLIP IS 0.9 SEC
+    //         Debug.Log("CORRECT");
+    //
+    //     }
+    //     
+    // }
     private async Task ShowInteractively()
     {
-        wrongAnswerIndication?.SetActive(false);
-        correctAnswerIndication?.SetActive(false);
-        
+        InitializeIndicators();
         endConditions = controller.endConditions;
-        
+    
         foreach (var message in messages)
         {
             if (cancelled) return;
-            await message.ShowAnimateTransition(); 
-
+        
+            // Animation
+            await message.ShowAnimateTransition();
+        
+            //Narration
             if (message.UseNarration)
             {
-                message.ToggleBackgroundHighlight(true);
-                var delayTime = (int)Mathf.Ceil(message.Narration());
-                for (int i = 0; i < delayTime; i++)
-                {
-                    if (cancelled) return;
-                    await Task.Delay(1000);
-                }
-                message.ToggleBackgroundHighlight(false);
-            } // showed & said everything
+                await ShowMessageWithNarration(message);
+            }
             else
             {
-                await Task.Delay(500);
-            }
-
-            while (!endConditions[stepName]())
-            {
-                wrongAnswerIndication.SetActive(false);
-                await TaskEx.WaitUntil(controller.IsStateChanged, 5, -1);
-                if (!endConditions[stepName]())
-                {
-                    wrongAnswerIndication.SetActive(true);
-                    Debug.Log("INCORRECT");
-                    correctionTip.SetActive(true);
-                    if (cancelled) return;
-                    await Task.Delay(6000); // INCORRECT CLIP IS 2.3 SEC
-                }
+                await Task.Delay(NARRATION_PAUSE_MS);
             }
             
-            correctionTip.SetActive(false);
-            wrongAnswerIndication.SetActive(false);
-            correctAnswerIndication.SetActive(true);
-            await Task.Delay(1000); // CORRECT CLIP IS 0.9 SEC
-            Debug.Log("CORRECT");
-
+            await WaitForCorrectAnswer();
+            
+            //
+            //await ShowCorrectFeedback();
         }
-        
     }
 
+    
+    private async Task ShowMessageWithNarration(UIPoint message)
+    {
+        message.ToggleBackgroundHighlight(true);
+        var delayTime = (int)Mathf.Ceil(message.Narration());
+    
+        if (!await DelayWithCancellation(delayTime * 1000))
+            return;
+        
+        message.ToggleBackgroundHighlight(false);
+        
+    }
+    private async Task<bool> DelayWithCancellation(int milliseconds)
+    {
+        var elapsed = 0;
+        while (elapsed < milliseconds)
+        {
+            if (cancelled) return false;
+            await Task.Delay(Math.Min(100, milliseconds - elapsed));
+            elapsed += 100;
+        }
+        return true;
+    }
+    private async Task WaitForCorrectAnswer()
+    {
+        // while
+        SetIndicatorState(wrongAnswerIndication, false);
+        SetIndicatorState(correctAnswerIndication, false);
+        
+        // await TaskEx.WaitUntil(controller.IsStateChanged, 1000, -1); //endConditions[stepName]
+        //
+        //     if (!endConditions[stepName]())
+        //     {
+        //         await ShowWrongAnswerFeedback();
+        //     }
+        
+        SetIndicatorState(correctionTip, false);
+        await TaskEx.WaitForConditionWithFeedback(
+            condition: () => endConditions[stepName](),
+            onCorrect: () => ShowCorrectFeedback(),
+            onWrong: () =>  ShowWrongFeedback(),
+            checkFrequency: 1000,
+            timeout: 30000); // 30 seconds
+        
+        
+    }
+    
+    private void SetIndicatorState(GameObject indicator, bool active)
+    {
+        indicator?.SetActive(active);
+    }
+    
+    private async Task ShowWrongFeedback()
+    {
+        SetIndicatorState(correctAnswerIndication, false);
+        SetIndicatorState(wrongAnswerIndication, true);
+        SetIndicatorState(correctionTip, true);
+        //if (cancelled) return;
+        await Task.Delay(WRONG_ANSWER_DISPLAY_MS);
+        Debug.Log("INCORRECT");
+    }
+
+    private async Task ShowCorrectFeedback()
+    {
+        SetIndicatorState(wrongAnswerIndication, false);
+        SetIndicatorState(correctionTip, false);
+        SetIndicatorState(correctAnswerIndication, true);
+        await Task.Delay(CORRECT_ANSWER_DISPLAY_MS);
+        Debug.Log("CORRECT");
+    }
+    
+    
+
+    
 
 
 }

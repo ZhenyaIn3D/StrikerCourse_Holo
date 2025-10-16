@@ -28,6 +28,7 @@ public class ScanTransformAdjustment : MonoBehaviour
         eventHandler = scanSource.GetComponent<DefaultObserverEventHandler>();
         mObserverBehaviour = scanSource.GetComponent<ObserverBehaviour>();
         mObserverBehaviour.OnTargetStatusChanged += HandleScanStatusChange;
+        
         eventHandler.OnTargetFound.AddListener(FlagFirstScan);
         eventHandler.OnTargetFound.AddListener(StartOverAllTimer);
         

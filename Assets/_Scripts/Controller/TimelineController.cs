@@ -47,7 +47,7 @@ public class TimelineController : MonoBehaviour
     private void OnDisable()
     {
          scenarioManager.OnStepCompleted -= StartSequence;
-         inputManager.UnSubscribeToSpeech("Fire",StartSequence);
+         //inputManager.UnSubscribeToSpeech("Fire",StartSequence);
     }
 
     private async void StartSequence(StepName stepName)

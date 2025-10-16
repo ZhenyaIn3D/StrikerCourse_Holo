@@ -975,8 +975,8 @@ PlayerSettings:
       PrivateNetworkClientServer: False
       InternetClientServer: False
       VideosLibrary: False
+      BackgroundMediaPlayback: True
       Objects3D: False
-      Proximity: False
       RemoteSystem: False
       BlockedChatMessages: False
       PhoneCall: False
@@ -998,9 +998,9 @@ PlayerSettings:
       PointOfService: False
       RecordedCallsFolder: True
       Contacts: False
+      Proximity: False
       InternetClient: True
       CodeGeneration: False
-      BackgroundMediaPlayback: True
       EnterpriseAuthentication: False
   metroTargetDeviceFamilies:
     Desktop: False

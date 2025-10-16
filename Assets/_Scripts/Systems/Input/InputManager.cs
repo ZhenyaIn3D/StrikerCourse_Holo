@@ -10,9 +10,9 @@ public class InputManager :MonoBehaviour
 
    private void Awake()
    {
-       Debug.Log(inputFactory == null);
+       //Debug.Log(inputFactory == null);
        speech = inputFactory.CreateSpeech(Resources.Load<SpeechEntryData>("Input/Speech/MRTKSpeechKeywords"));
-       Debug.Log(speech == null);
+       //Debug.Log(speech == null);
        speech.StartRecognize();
    }
    
