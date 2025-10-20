@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Step6
   m_EditorClassIdentifier: 
   stepName: 28
-  numOfButtons: 1
-  actions: 0000000001000000
+  numOfButtons: 2
+  actions: 0000000007000000
   buttonTexts:
   - Continue
+  - Again
   title: Step 2 - Sensor Control
   text: CCD/IR Selection Pushbutton allows to switch between CCD and IR sensors.
     The System default upon power-up is CCD.The Operator can see the selected active
     sensor on the Status Bar
+  isInteractive: 0
   scanPriority: 0000000001000000
   waitTimeBetweenPriorities: 0.8
   hasSound: 0

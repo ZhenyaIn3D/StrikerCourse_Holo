@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepName: 31
   numOfButtons: 1
-  actions: 0000000001000000
+  actions: 0000000007000000
   buttonTexts:
   - Continue
+  - Again
   title: Step 3 - Polarity Switch
   text: If the Operator Press this button while the system is in CCD it will indicate
     that it is possible to use this button only in IR. In case the active sensor
     is IR, the polarity can be changed between White Hot and Black Hot.
+  isInteractive: 0
   scanPriority: 0000000001000000
   waitTimeBetweenPriorities: 0.8
   hasSound: 0

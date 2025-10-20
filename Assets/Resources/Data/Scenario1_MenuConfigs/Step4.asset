@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepName: 12
   numOfButtons: 2
-  actions: 0100000000000000
+  actions: 010000000000000007000000
   buttonTexts:
   - Back
   - Continue
+  - Again
   title: Step 3 -Vehicle Commander Handle
   text: 
+  isInteractive: 0
   scanPriority: 
   waitTimeBetweenPriorities: 0
   hasSound: 0
   SoundTypeKeys: 0
+  optionaltexts: []

@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: Step2
   m_EditorClassIdentifier: 
   stepName: 24
-  numOfButtons: 1
-  actions: 0000000001000000
+  numOfButtons: 3
+  actions: 000000000100000007000000
   buttonTexts:
   - Continue
+  - Back
+  - Again
   title: 'Step 1 '
   text: Sight Mode Selection
+  isInteractive: 0
   scanPriority: 0000000001000000
   waitTimeBetweenPriorities: 0.8
   hasSound: 0

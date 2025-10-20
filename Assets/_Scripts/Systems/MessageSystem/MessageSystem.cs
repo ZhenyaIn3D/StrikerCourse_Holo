@@ -96,6 +96,7 @@ public enum StepName
     //Zoom/Focus
     //
     FinishAdvancedScenario,
+    VideoMenu,
 
 }
 

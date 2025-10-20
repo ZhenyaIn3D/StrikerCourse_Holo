@@ -21,7 +21,9 @@ MonoBehaviour:
   - Back To Menu
   title: Course#2
   text: Basic Sight Operation
+  isInteractive: 0
   scanPriority: 
   waitTimeBetweenPriorities: 0
   hasSound: 0
   SoundTypeKeys: 0
+  optionaltexts: []

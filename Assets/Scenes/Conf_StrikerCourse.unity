@@ -4349,7 +4349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865af625aec0f844384c77ac01d446ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VchStateInterpreter: {fileID: 1583663023}
+  vchStateReader: {fileID: 0}
 --- !u!114 &1338516301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5355,6 +5355,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateCycle: 1
+  textState: {fileID: 0}
+  SuccessSignal: {fileID: 0}
 --- !u!1 &1599594206
 GameObject:
   m_ObjectHideFlags: 0
@@ -7522,6 +7524,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f5e279dae4a47804c90c96840dd9cf3b, type: 2}
   - {fileID: 11400000, guid: cacff57c5fafef543852edabc9cb5648, type: 2}
   title: {fileID: 1599594209}
+  ActionRequiredTag: {fileID: 0}
   description: {fileID: 853181985}
   mats:
   - {fileID: 2100000, guid: f98c6d25c0e90214e91c0dfe42c8c830, type: 2}
@@ -7798,6 +7801,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5413966570648188070, guid: 709daaa914a6baa4f887a5f44b2c0fad,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8279147123414355485, guid: 709daaa914a6baa4f887a5f44b2c0fad,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}

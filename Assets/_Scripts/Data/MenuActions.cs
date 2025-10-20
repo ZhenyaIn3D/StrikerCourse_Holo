@@ -8,6 +8,8 @@ public enum MenuActions
     Restart,
     LiveExp,
     BackToMenu,
-    Again
+    Again,
+    ToVideoMenu,
+    PlayVideo
 }
 

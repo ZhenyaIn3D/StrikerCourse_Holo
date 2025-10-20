@@ -70,6 +70,10 @@ public class Step : MonoBehaviour
         await Task.Delay(100); // was 500
     }
 
+    public void ShowAgain()
+    {
+        
+    }
     public void Hide()
     {
         cancelled = true;
@@ -85,9 +89,7 @@ public class Step : MonoBehaviour
         SetIndicatorState(correctAnswerIndication, false);
     }
     
-    /// <summary>
-    /// Ways of showing step content
-    /// </summary>
+    #region Different ways to show
     private async Task ShowGradually()
     { 
         Debug.Log("ShowGradually");
@@ -138,58 +140,7 @@ public class Step : MonoBehaviour
             }
         }
     }
-
-    // private async Task ShowInteractively()
-    // {
-    //     wrongAnswerIndication?.SetActive(false);
-    //     correctAnswerIndication?.SetActive(false);
-    //     
-    //     endConditions = controller.endConditions;
-    //     
-    //     foreach (var message in messages)
-    //     {
-    //         if (cancelled) return;
-    //         await message.ShowAnimateTransition(); 
-    //
-    //         if (message.UseNarration)
-    //         {
-    //             message.ToggleBackgroundHighlight(true);
-    //             var delayTime = (int)Mathf.Ceil(message.Narration());
-    //             for (int i = 0; i < delayTime; i++)
-    //             {
-    //                 if (cancelled) return;
-    //                 await Task.Delay(1000);
-    //             }
-    //             message.ToggleBackgroundHighlight(false);
-    //         } // showed & said everything
-    //         else
-    //         {
-    //             await Task.Delay(500);
-    //         }
-    //
-    //         while (!endConditions[stepName]())
-    //         {
-    //             wrongAnswerIndication.SetActive(false);
-    //             await TaskEx.WaitUntil(controller.IsStateChanged, 5, -1);
-    //             if (!endConditions[stepName]())
-    //             {
-    //                 wrongAnswerIndication.SetActive(true);
-    //                 Debug.Log("INCORRECT");
-    //                 correctionTip.SetActive(true);
-    //                 if (cancelled) return;
-    //                 await Task.Delay(6000); // INCORRECT CLIP IS 2.3 SEC
-    //             }
-    //         }
-    //         
-    //         correctionTip.SetActive(false);
-    //         wrongAnswerIndication.SetActive(false);
-    //         correctAnswerIndication.SetActive(true);
-    //         await Task.Delay(1000); // CORRECT CLIP IS 0.9 SEC
-    //         Debug.Log("CORRECT");
-    //
-    //     }
-    //     
-    // }
+    
     private async Task ShowInteractively()
     {
         InitializeIndicators();
@@ -218,7 +169,7 @@ public class Step : MonoBehaviour
 
         }
     }
-
+    #endregion
     
     private async Task ShowMessageWithNarration(UIPoint message)
     {
@@ -229,7 +180,6 @@ public class Step : MonoBehaviour
             return;
         
         message.ToggleBackgroundHighlight(false);
-        
     }
     private async Task<bool> DelayWithCancellation(int milliseconds)
     {
@@ -263,10 +213,9 @@ public class Step : MonoBehaviour
             onWrong: () =>  ShowWrongFeedback(),
             checkFrequency: 1000,
             timeout: 30000); // 30 seconds
-        
-        
     }
     
+    #region Feedback
     private void SetIndicatorState(GameObject indicator, bool active)
     {
         indicator?.SetActive(active);
@@ -287,14 +236,12 @@ public class Step : MonoBehaviour
         SetIndicatorState(wrongAnswerIndication, false);
         SetIndicatorState(correctionTip, false);
         SetIndicatorState(correctAnswerIndication, true);
-        await Task.Delay(CORRECT_ANSWER_DISPLAY_MS);
+        await Task.Delay(CORRECT_ANSWER_DISPLAY_MS * 2);
         Debug.Log("CORRECT");
     }
     
     
-
-    
-
+    #endregion
 
 }
 

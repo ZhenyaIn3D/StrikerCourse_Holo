@@ -65,7 +65,6 @@ public class ScenarioManager : ScanTargetControllerBase
         inputManager.UnSubscribeToSpeech("Back",Back);
     }
     
-
     private void InitButtons()
     {
         timer = new CountdownTimer(0.2f);
@@ -80,12 +79,6 @@ public class ScenarioManager : ScanTargetControllerBase
         }
 
 
-    }
-
-    private void InitVCHActions()
-    {
-        
-        
     }
     
     private void Next()
@@ -114,6 +107,12 @@ public class ScenarioManager : ScanTargetControllerBase
         }
         ShowStep();
         timelineController.ResetSequence();
+    }
+
+    private void Again()
+    {
+        HideStep();
+        ShowStep();
     }
 
     private void SetButtonMaterial(int index, bool isNext)
@@ -182,7 +181,6 @@ public class ScenarioManager : ScanTargetControllerBase
         }
     }
     
-
     private void RestartScenario()
     {
         currentStep = 0;
@@ -199,7 +197,18 @@ public class ScenarioManager : ScanTargetControllerBase
         ShowStep();
         timelineController.ResetSequence();
     }
-
+    
+    public void ToVideoMenu()
+    {
+        HideStep();
+        currentSenario = 4;
+        currentStep = 0;
+        
+        Debug.Log("TO VIDEO MENU");
+        ShowStep();
+        timelineController.ResetSequence();
+    }
+    
     public void PressButton(int index)
     {
         if(!pressDelayTimer.IsFinished)
@@ -235,15 +244,17 @@ public class ScenarioManager : ScanTargetControllerBase
             MenuActions.Next => Next,
             MenuActions.Back => Back,
             MenuActions.Restart => RestartScenario,
-            MenuActions.Basic => ()=>ChooseScenario(MenuActions.Basic),
-            MenuActions.Advanced => ()=>ChooseScenario(MenuActions.Advanced), // COURSE3
-            MenuActions.LiveExp => ()=>OnStartFinalSequence?.Invoke(),
+            MenuActions.Basic => ()=> ChooseScenario(MenuActions.Basic),
+            MenuActions.Advanced => ()=> ChooseScenario(MenuActions.Advanced), // COURSE3
+            MenuActions.LiveExp => ()=> OnStartFinalSequence?.Invoke(),
             MenuActions.BackToMenu => BackToMenu,
+            MenuActions.Again => Again,
+            MenuActions.ToVideoMenu => ToVideoMenu,
+            MenuActions.PlayVideo => PlayVideo,
             _ => null
         };
     }
     
-
     private void ChooseScenario(MenuActions action)
     {
         switch (action)
@@ -261,7 +272,6 @@ public class ScenarioManager : ScanTargetControllerBase
                 return;
         }
     }
-    
     
     public override async void SendShowStepRequest(StepName stepName)
     {
@@ -304,6 +314,7 @@ public class ScenarioManager : ScanTargetControllerBase
         UpdateUI();
         PlaySound();
         var step = scenarios[currentSenario].menuConfig[currentStep].stepName;
+        Debug.Log(step);
         SendShowStepRequest(step);
         OnStepCompleted?.Invoke(step);
     }
@@ -353,10 +364,10 @@ public class ScenarioManager : ScanTargetControllerBase
     }
 
     /// <summary>
-/// Deactivate the the scan target after we scanned it
-/// </summary>
-/// <param name="scanTargetType"></param>
-/// <returns>If all of the scans are found. relevant when one controller controls more than one target scan</returns>
+    /// Deactivate the the scan target after we scanned it
+    /// </summary>
+    /// <param name="scanTargetType"></param>
+    /// <returns>If all of the scans are found. relevant when one controller controls more than one target scan</returns>
     public override bool DeActivateScanTarget(ScanTargetType scanTargetType)
     {
         scanStatus[(int)scanTargetType]=true;
@@ -399,4 +410,8 @@ public class ScenarioManager : ScanTargetControllerBase
         }
     }
 
+    public void PlayVideo()
+    {
+        // Hide menu probably, load model around, start video rendered in the "window" of the model
+    }
 }
