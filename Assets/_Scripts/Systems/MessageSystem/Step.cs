@@ -11,7 +11,7 @@ public class Step : MonoBehaviour
 {
     private const int NARRATION_PAUSE_MS = 500;
     private const int WRONG_ANSWER_DISPLAY_MS = 6000;
-    private const int CORRECT_ANSWER_DISPLAY_MS = 1000;
+    private const int CORRECT_ANSWER_DISPLAY_MS = 3000;
     
     [SerializeField] private UIPoint[] messages;
     [FormerlySerializedAs("infoStepName")] public StepName stepName;
@@ -25,7 +25,7 @@ public class Step : MonoBehaviour
     private VCHStateMachineController controller;
 
     private Dictionary<StepName, Func<bool>> endConditions;
-    private Dictionary<StepName, Func<VCHControlState>> relevantStateGetters;
+    private Dictionary<StepName,  Func<VCHControlState>> relevantStateGetters; //Func<VCHControlState>
     [SerializeField] private AudioClip[] narrationVersions;//@TODO??
     [SerializeField] private string[] instructionsVersions;//@TODO??
     Dictionary<VCHControlState, int> stateVersions;
@@ -194,16 +194,8 @@ public class Step : MonoBehaviour
     }
     private async Task WaitForCorrectAnswer()
     {
-        // while
         SetIndicatorState(wrongAnswerIndication, false);
         SetIndicatorState(correctAnswerIndication, false);
-        
-        // await TaskEx.WaitUntil(controller.IsStateChanged, 1000, -1); //endConditions[stepName]
-        //
-        //     if (!endConditions[stepName]())
-        //     {
-        //         await ShowWrongAnswerFeedback();
-        //     }
         
         SetIndicatorState(correctionTip, false);
         await TaskEx.WaitForConditionWithFeedback(
@@ -226,7 +218,6 @@ public class Step : MonoBehaviour
         SetIndicatorState(correctAnswerIndication, false);
         SetIndicatorState(wrongAnswerIndication, true);
         SetIndicatorState(correctionTip, true);
-        //if (cancelled) return;
         await Task.Delay(WRONG_ANSWER_DISPLAY_MS);
         Debug.Log("INCORRECT");
     }
@@ -236,7 +227,7 @@ public class Step : MonoBehaviour
         SetIndicatorState(wrongAnswerIndication, false);
         SetIndicatorState(correctionTip, false);
         SetIndicatorState(correctAnswerIndication, true);
-        await Task.Delay(CORRECT_ANSWER_DISPLAY_MS * 2);
+        await Task.Delay(CORRECT_ANSWER_DISPLAY_MS);
         Debug.Log("CORRECT");
     }
     

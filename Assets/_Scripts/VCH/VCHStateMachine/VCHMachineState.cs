@@ -9,6 +9,11 @@ namespace VCHStateMachine
         public ElevationControlState currentElevation; //direction?
         public ZoomControlState currentZoomDirection;
         public FocusControlState currentFocusDirection;
-        
+
+        public bool Equals(VCHMachineState obj)
+        {
+            return currentMode.Equals(obj.currentMode) && currentSensor.Equals(obj.currentSensor) &&
+                   currentPolarity.Equals(obj.currentPolarity);
+        }
     }
 }

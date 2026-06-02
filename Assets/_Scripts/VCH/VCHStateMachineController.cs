@@ -10,9 +10,10 @@ namespace VCHStateMachine
     {
         public static VCHStateMachineController Instance;
         private VCHMachineState currentState;
+        private VCHMachineState previousState;
         [SerializeField] private VCHStateReader vchStateReader;
 
-        public Dictionary<StepName, Func<VCHControlState>> relevantStateGetters ;
+        public Dictionary<StepName,Func<VCHControlState>> relevantStateGetters ; //Func<VCHControlState>
         public Dictionary<StepName, Func<bool>> endConditions;
 
         private bool stateChanged = false;
@@ -63,16 +64,18 @@ namespace VCHStateMachine
             if (Instance == null) Instance = this;// Singleton pattern
 
             currentState = new VCHMachineState(); // data object
-            relevantStateGetters = new Dictionary<StepName, Func<VCHControlState>>
+            previousState = new VCHMachineState();
+            relevantStateGetters = new Dictionary<StepName,Func<VCHControlState> > // Func<VCHControlState>
             {
-                { StepName.SightModeSelectionToObserver, GetCurrentModeControlState},
-                { StepName.SightModeSelectionToEnslave, GetCurrentModeControlState },
-                { StepName.SightModeSelectionToShooter, GetCurrentModeControlState },
-                { StepName.SensorToggleToIR, GetCurrentSensorControlState },
-                { StepName.SensorToggleToCDD, GetCurrentSensorControlState },
-                { StepName.PolarityToggleToBlackHot, GetCurrentPolarityControlState},
-                { StepName.PolarityToggleToWhiteHot, GetCurrentPolarityControlState}
+                { StepName.SightModeSelectionToObserver, GetCurrentModeControlState}, //GetCurrentModeControlState
+                { StepName.SightModeSelectionToEnslave, GetCurrentModeControlState}, //GetCurrentModeControlState
+                { StepName.SightModeSelectionToShooter,GetCurrentModeControlState}, //GetCurrentModeControlState
+                { StepName.SensorToggleToIR,GetCurrentSensorControlState }, //GetCurrentSensorControlState 
+                { StepName.SensorToggleToCDD,GetCurrentSensorControlState }, //GetCurrentSensorControlState 
+                { StepName.PolarityToggleToBlackHot, GetCurrentPolarityControlState}, //GetCurrentPolarityControlState
+                { StepName.PolarityToggleToWhiteHot, GetCurrentPolarityControlState} //GetCurrentPolarityControlState
             };
+            
             //Interactive steps depend on specific condition to continue
             endConditions = new Dictionary<StepName, Func<bool>>
             {
@@ -125,9 +128,15 @@ namespace VCHStateMachine
 
         public bool IsStateChanged()
         {
-            return stateChanged;
+            return currentState.Equals(previousState);
         }
 
+        public VCHMachineState GetCurrentState()
+        {
+            return currentState;
+        }
+
+        
         #region Shooter Control
 
         public VCHControlState GetCurrentModeControlState()
@@ -229,7 +238,6 @@ namespace VCHStateMachine
             stateChanged = false;
             if (currentState.currentMode == null || mode != currentState.currentMode.ModeKey) 
             {
-                
                 ChangeModeState(mode); // only for the first
                 stateChanged = true;
             }
@@ -241,8 +249,9 @@ namespace VCHStateMachine
             
             // MODE, if new
             receivedModeKey = modeControlKeyDictionary[newState.Mode];
-            if (currentState.currentMode == null || receivedModeKey != currentState.currentMode.ModeKey) 
+            if (currentState.currentMode == null || receivedModeKey != currentState.currentMode.ModeKey)
             {
+                
                 ChangeModeState(receivedModeKey); // only for the first
                 stateChanged = true;
             }
@@ -264,11 +273,15 @@ namespace VCHStateMachine
             }
             
 
-            // AZYMUTH, if new
+            //AZYMUTH, if new
             // receivedAzymuthKey = azymuthControlKeyDictionary[newState.Azymuth_Axes];
-            // if (currentAzymuth == null) ChangeAzymuthControlState(receivedAzymuthKey);
-            // if (receivedAzymuthKey != currentAzymuth.AzymuthControlKey) ChangeAzymuthControlState(receivedAzymuthKey);
-            
+            // if (currentState.currentAzymuth == null ||
+            //     receivedAzymuthKey != currentState.currentAzymuth.AzymuthControlKey)
+            // {
+            //     ChangeAzymuthControlState(receivedAzymuthKey);
+            //     stateChanged = true;
+            // }
+
         }
 
         public void ChangeModeState(ModeControlKey mode)

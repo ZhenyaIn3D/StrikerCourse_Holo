@@ -54,7 +54,7 @@ namespace _Scripts.Utils
         /// <param name="timeout">The timeout in milliseconds.</param>
         /// <returns></returns>
         public static async Task WaitForConditionWithFeedback(
-            Func<System.Object> getCurrentRelevantState,
+            Func<VCHControlState> getCurrentRelevantState, 
             Func<bool> condition, 
             Action onCorrect, 
             Action onWrong,
@@ -67,28 +67,25 @@ namespace _Scripts.Utils
             
             while (true)
             {
-                // Check for timeout
-                // if (timeout > 0 && (Time.time - startTime) * 1000 >= timeout)
-                // {
-                //     throw new TimeoutException();
-                // }
-        
+
                 await Task.Delay(checkFrequency);
                 
                 var currentState = getCurrentRelevantState();
+                
                 var conditionMet = condition();
 
                 if (currentState != initialState)
                 {
                     // Detect state change
-
+                    Debug.Log("CHANGED STATE");
                     if (conditionMet) // Condition met
                     {
                         onCorrect?.Invoke();
                         return; // Exit function
                     }
-                    else if (currentState != previousState)// Condition not met
+                    else if (currentState != previousState)// Condition not met currentState != previousState
                     {
+                        Debug.Log("CHANGED STATE BUT NOT CORRECT");
                         onWrong?.Invoke();
                     }
                 } 
@@ -100,44 +97,3 @@ namespace _Scripts.Utils
         
     }
 }
-
-
-// public async Task WaitForStateChange<T>(
-//     Func<T> getState,
-//     Func<T, bool> isCorrect,
-//     Action onCorrect,
-//     Action onWrong,
-//     int checkFrequency = 100)
-// {
-//     var previousState = getState();
-//     
-//     while (true)
-//     {
-//         await Task.Delay(checkFrequency);
-//         
-//         var currentState = getState();
-//         
-//         if (!EqualityComparer<T>.Default.Equals(currentState, previousState))
-//         {
-//             if (isCorrect(currentState))
-//             {
-//                 onCorrect?.Invoke();
-//                 return;
-//             }
-//             else
-//             {
-//                 onWrong?.Invoke();
-//                 previousState = currentState;
-//             }
-//         }
-//     }
-// }
-//
-
-
-//await WaitForStateChange(
-// getState: () => currentScanState,
-// isCorrect: (state) => state == ScanState.Success,
-// onCorrect: () => ShowCorrectIndicator(),
-// onWrong: () => ShowWrongIndicator()
-//     );

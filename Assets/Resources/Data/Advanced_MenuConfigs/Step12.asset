@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepName: 39
   numOfButtons: 1
-  actions: 0000000001000000
+  actions: 06000000
   buttonTexts:
-  - Continue
+  - Finish
   title: END
   text: Congratulations on completing the Basic Sight Operation Interactive course
+  isInteractive: 0
   scanPriority: 0000000001000000
   waitTimeBetweenPriorities: 0.8
   hasSound: 1
